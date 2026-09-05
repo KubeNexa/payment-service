@@ -14,7 +14,7 @@ pipeline{
 
         stage('Run Unit Tests'){
             steps{
-                sh 'npm test'
+                sh 'dotnet test'
             }
         }
 
@@ -65,8 +65,7 @@ pipeline{
                         git config user.email "jenkins@ci.com"
                         git config user.name "jenkins"
 
-                        # Update the image tag in the kustomization.yaml file
-                        sed -i "s|image: .*paymentservice.*|image: ${IMAGE_NAME}|g" deployment.yaml
+                        sed -i "s|image: .*payment-service.*|image: ${IMAGE_NAME}|g" deployment.yaml
                        
                        git add .
                        git commit -m "Update Payment Service image to ${IMAGE_NAME}"
